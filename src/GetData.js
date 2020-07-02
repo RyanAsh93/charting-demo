@@ -3,6 +3,8 @@ import Axios from 'axios';
 import { X_RAPIDAPI_KEY } from './keys';
 import CovidStatsTotal from './CovidStatsTotal'
 import CovidBarChart from './CovidBarChart'
+import List from './customComponents/List';
+import CovidCard from './customComponents/CovidCard';
 
 export default function GetData(props) {
   const [covidData, setCovidData] = useState([])
@@ -47,7 +49,12 @@ export default function GetData(props) {
       <h1>Data here</h1>
       {covidData.length}
       <CovidBarChart covidData={covidData} count={10} />
-      <CovidStatsTotal covidData={covidData} />
+      {/* <CovidStatsTotal covidData={covidData} /> */}
+      <List 
+      header='Covid stats by country'
+      data={covidData} 
+      renderItem={(item) => <CovidCard country={item}/>} />
+      {/* <List data={covidData} renderItem={(item) => <div>{item.population}</div>} /> */}
     </div>
   )
 }
